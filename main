@@ -1,0 +1,107 @@
+class Account:
+    # define __init__ method intilaize variable for account id, balance and 
+    #annual interset with given arguments 
+    def __init__ (self,id = 0 , init_balance= 100 , annualrate = 0):
+        self.__id = id
+        self.__balance = init_balance
+        self.__annualintersetrate = annualrate
+        
+    def getid(self):
+        return self.__id
+    
+    def getbalance(self):
+        return self.__balance
+    
+    def getannualintersetrate(self):
+        return self.__annualintersetrate 
+    
+    def get_monthly_interest_rate(self): 
+        # calculate and return monthly rate based on annual interset rate
+        return self.__annualintersetrate / 12
+    
+    def get_monthly_interest(self):       
+        return self.__balance * self.getannualintersetrate()
+    
+    def setid(self, id):
+        self.__id = id
+    
+    def setbalance(self, balance):
+        self.__balance = balance
+   
+    def setannualintersetrate(self, rate):
+        self.__annualintersetrate = rate
+   
+    def withdraw(self, amount):
+        # subtract the given amount from account balance
+        self.__balance -= amount
+    def deposit(self, amount):
+        # add given amount to the account balance
+        self.__balance += amount
+
+
+
+if __name__ == '__main__':
+   
+  
+   # List of accounts
+   accounts = []
+  
+   for i in range(0, 10): # Creating ten accounts in a list with the ids 0 to 9 
+       account = Account(i, 100.0) # put an initial balance of $100
+       accounts.append(account)
+      
+   # Playing Game ATM   
+   while True:
+  
+       # Reading id from user
+       id = int(input("\n Enter account id: "))
+      
+       # Loop till id is valid
+       while id < 0 or id > 9:
+           id = int(input("\n Invalid Id.. Re-enter: "))
+
+       # Iterating over game  
+       while True:
+          
+           # Printing menu
+           print("\n 1: View Balance \n 2: Withdraw \n 3: Deposit \n 4: Exit ")
+          
+           # Reading selection
+           selection = int(input("\n Enter your selection: "))
+          
+           # Getting account object
+           for acc in accounts:
+               # Comparing account id
+               if acc.getid() == id:
+                   accountobject = acc
+                   break
+          
+           # View Balance
+           if selection == 1:
+               # Printing balance
+               print(accountobject.getbalance())
+              
+           # Withdraw  
+           elif selection == 2:
+               # Reading amount
+               amount = float(input("\n Enter amount to withdraw: "))
+               # Calling withdraw method
+               accountobject.withdraw(amount)
+               # Printing updated balance
+               print("\n Updated Balance: " + 
+                     str(accountobject.getbalance()) + " \n")
+              
+           # Deposit  
+           elif selection == 3:
+               # Reading amount
+               amount = float(input("\n Enter amount to deposit: "))
+               # Calling deposit method
+               accountobject.deposit(amount);
+               # Printing updated balance
+               print("\n Updated Balance: " + 
+                     str(accountobject.getbalance()) + " \n")
+          
+           # Any other choice
+           else:
+               break
+          
